@@ -18,6 +18,7 @@ import argparse
 from pathlib import Path
 
 from mymodules.trainers import trainer_provider
+from mymodules.trainers.trainers_base import SAVED_CONFIG_NAME, RESULT_PARENT_PATH
 
 
 parser = argparse.ArgumentParser()
@@ -32,7 +33,7 @@ if __name__ == "__main__":
     epoch_num = args.epoch_num
     resolution = args.resolution
 
-    config_path = list(Path("results").joinpath(result_folder).glob("*_config.json"))[0]
+    config_path = RESULT_PARENT_PATH.joinpath(result_folder, SAVED_CONFIG_NAME)
 
     trainer = trainer_provider(config_path, is_train=False)
     trainer.inference_mesh(epoch_num=epoch_num, resolution=resolution)
